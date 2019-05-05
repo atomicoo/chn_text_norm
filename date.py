@@ -1,6 +1,6 @@
 import re
-from text_normalizer.basic_util import *
-from text_normalizer.cardinal import Cardinal
+from basic_util import *
+from cardinal import Cardinal
 
 
 def date2chn(date_text):

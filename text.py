@@ -8,12 +8,12 @@ __data__ = '2019-05-03'
 
 import re
 
-from text_normalizer.cardinal import Cardinal
-from text_normalizer.digit import Digit
-from text_normalizer.telephone import TelePhone
-from text_normalizer.fraction import Fraction
-from text_normalizer.date import date2chn
-from text_normalizer.money import money2chn
+from cardinal import Cardinal
+from digit import Digit
+from telephone import TelePhone
+from fraction import Fraction
+from date import date2chn
+from money import money2chn
 
 
 class Text:

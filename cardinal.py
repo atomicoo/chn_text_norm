@@ -7,7 +7,7 @@
 __author__ = 'Zhiyang Zhou <zyzhou@stu.xmu.edu.cn>'
 __data__ = '2019-05-03'
 
-from text_normalizer.basic_util import *
+from basic_util import *
 
 
 class Cardinal:

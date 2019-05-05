@@ -108,6 +108,7 @@ venv.bak/
 
 # Customize
 references
+url.txt
 
 # Git
 .git
