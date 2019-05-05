@@ -102,3 +102,12 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# JetBrains PyCharm
+.idea
+
+# Customize
+references
+
+# Git
+.git
