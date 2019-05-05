@@ -11,5 +11,7 @@ git clone this repo to the root directory of your project which need to use it.
 
 ### How to Use ? ###
 
+    from chn_text_norm.text import *
+    
     raw_text = 'your raw text'
     text = Text(raw_text=raw_text).normalize()
