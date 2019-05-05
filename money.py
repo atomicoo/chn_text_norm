@@ -1,5 +1,5 @@
 import re
-from basic_util import *
+from chn_text_norm.basic_util import *
 
 
 currency_name = r'(人民币|美元|日元|英镑|欧元|马克|法郎|加拿大元|澳元|港币|先令|芬兰马克|爱尔兰镑|' \

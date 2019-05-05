@@ -8,12 +8,12 @@ __data__ = '2019-05-03'
 
 import re
 
-from cardinal import Cardinal
-from digit import Digit
-from telephone import TelePhone
-from fraction import Fraction
-from date import date2chn
-from money import money2chn
+from chn_text_norm.cardinal import Cardinal
+from chn_text_norm.digit import Digit
+from chn_text_norm.telephone import TelePhone
+from chn_text_norm.fraction import Fraction
+from chn_text_norm.date import date2chn
+from chn_text_norm.money import money2chn
 
 
 class Text:
@@ -111,5 +111,3 @@ if __name__ == '__main__':
     print(Text(raw_text='纯数：2983.07和12345.67890。').normalize())
     print(Text(raw_text='日期：今天是9012年12月15日,天气很好').normalize())
     print(Text(raw_text='金钱：小花有20000澳元，小明借了50.5元花了30.5剩下20块,非常的高兴,那就给小花12块5吧,那我就剩下17块5，小明还欠34.5，小草欠小花20.1万').normalize())
-
-

@@ -7,7 +7,7 @@
 __author__ = 'Zhiyang Zhou <zyzhou@stu.xmu.edu.cn>'
 __data__ = '2019-05-03'
 
-from basic_util import *
+from chn_text_norm.basic_util import *
 
 
 class TelePhone:

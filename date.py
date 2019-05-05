@@ -1,6 +1,6 @@
 import re
-from basic_util import *
-from cardinal import Cardinal
+from chn_text_norm.basic_util import *
+from chn_text_norm.cardinal import Cardinal
 
 
 def date2chn(date_text):
