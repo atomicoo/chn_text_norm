@@ -4,7 +4,7 @@ from chn_text_norm.cardinal import Cardinal
 
 
 def date2chn(date_text):
-    pattern = re.compile(r'\d+年')
+    pattern = re.compile(r'\d{4}年')
     matcher = re.search(pattern, date_text)
     if matcher:
         result = ''
@@ -13,8 +13,17 @@ def date2chn(date_text):
             result += CHINESE_DIGIS[int(i)]
         date_text = date_text[:st] + result + date_text[ed - 1:]
 
-    pattern = re.compile(r'\d+月\d{0,2}')
-    pattern_m = re.compile(r'\d+月')
+    pattern = re.compile(r'([09])\d年')
+    matcher = re.search(pattern, date_text)
+    if matcher:
+        result = ''
+        st, ed = matcher.span()
+        for i in date_text[st: ed - 1]:
+            result += CHINESE_DIGIS[int(i)]
+        date_text = date_text[:st] + result + date_text[ed - 1:]
+
+    pattern = re.compile(r'\d{1,2}月\d{0,2}')
+    pattern_m = re.compile(r'\d{1,2}月')
     matcher = re.search(pattern, date_text)
     matcher_m = re.search(pattern_m, date_text)
     if matcher:
@@ -35,4 +44,5 @@ def date2chn(date_text):
 
 if __name__ == '__main__':
     # 测试程序
-    print(date2chn(date_text='今天是9012年12月15日天气很好'))
+    print(date2chn(date_text='今天是9012年12月15日。'))
+    print(date2chn(date_text='那是09年的春天。'))

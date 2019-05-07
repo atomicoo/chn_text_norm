@@ -2,6 +2,7 @@
 """
 TEXT类
 """
+from chn_text_norm.percentage import Percentage
 
 __author__ = 'Zhiyang Zhou <zyzhou@stu.xmu.edu.cn>'
 __data__ = '2019-05-03'
@@ -25,6 +26,16 @@ class Text:
         self.raw_text = raw_text
         self.norm_text = norm_text
 
+    def _particular(self):
+        text = self.norm_text
+        pattern = re.compile(r"(([a-zA-Z]+)二([a-zA-Z]+))")
+        matchers = pattern.findall(text)
+        if matchers:
+            for matcher in matchers:
+                text = text.replace(matcher[0], matcher[1]+'2'+matcher[2])
+        self.norm_text = text
+        return self.norm_text
+
     def normalize(self):
         text = self.raw_text
 
@@ -46,10 +57,6 @@ class Text:
             # print('telephone')
             for matcher in matchers:
                 text = text.replace(matcher[0], TelePhone(telephone=matcher[0]).telephone2chntext())
-            # m0 = matcher[0][0]
-            # m1 = TelePhone(telephone=matcher[0][1]).telephone2chntext()
-            # m2 = matcher[0][-1]
-            # text = ''.join([m0, m1, m2])
         # 固话
         pattern = re.compile(r"((0(10|2[1-3]|[3-9]\d{2})-?)?[1-9]\d{6,7})")
         matchers = pattern.findall(text)
@@ -57,10 +64,6 @@ class Text:
             # print('fixed telephone')
             for matcher in matchers:
                 text = text.replace(matcher[0], TelePhone(telephone=matcher[0]).telephone2chntext(fixed=True))
-                # m0 = matcher[0][0]
-                # m1 = TelePhone(telephone=matcher[0][1]).telephone2chntext(fixed=True)
-                # m2 = matcher[0][-1]
-                # text = ''.join([m0, m1, m2])
 
         # 规范化分数
         pattern = re.compile(r"(\d+/\d+)")
@@ -69,10 +72,14 @@ class Text:
             # print('fraction')
             for matcher in matchers:
                 text = text.replace(matcher, Fraction(fraction=matcher).fraction2chntext())
-            # m0 = matcher[0][0]
-            # m1 = Fraction(fraction=matcher[0][1]).fraction2chntext()
-            # m2 = matcher[0][-1]
-            # text = ''.join([m0, m1, m2])
+
+        # 规范化百分数
+        pattern = re.compile(r"(\d+\.?\d*%)")
+        matchers = pattern.findall(text)
+        if matchers:
+            # print('percentage')
+            for matcher in matchers:
+                text = text.replace(matcher, Percentage(percentage=matcher).percentage2chntext())
 
         # 规范化数字编号
         pattern = re.compile(r"(\d{11,32})")
@@ -81,10 +88,6 @@ class Text:
             # print('digit')
             for matcher in matchers:
                 text = text.replace(matcher, Digit(digit=matcher).digit2chntext())
-            # m0 = matcher[0][0]
-            # m1 = Digit(digit=matcher[0][1]).digit2chntext()
-            # m2 = matcher[0][-1]
-            # text = ''.join([m0, m1, m2])
 
         # 规范化纯数
         pattern = re.compile(r"(\d+\.?\d*)")
@@ -93,12 +96,11 @@ class Text:
             # print('cardinal')
             for matcher in matchers:
                 text = text.replace(matcher, Cardinal(cardinal=matcher).cardinal2chntext())
-            # m0 = matcher[0][0]
-            # m1 = Cardinal(cardinal=matcher[0][1]).cardinal2chntext()
-            # m2 = matcher[0][-1]
-            # text = ''.join([m0, m1, m2])
 
-        return text
+        self.norm_text = text
+        self._particular()
+
+        return self.norm_text
 
 
 if __name__ == '__main__':
@@ -107,7 +109,9 @@ if __name__ == '__main__':
     print(Text(raw_text='固话：0595-23865596或0595-23880880').normalize())
     print(Text(raw_text='手机：+86 19859213959。').normalize())
     print(Text(raw_text='分数：32477/76391。').normalize())
+    print(Text(raw_text='百分数：32.04%。').normalize())
     print(Text(raw_text='编号：31520181154418。').normalize())
-    print(Text(raw_text='纯数：2983.07和12345.67890。').normalize())
+    print(Text(raw_text='纯数：2983.07和12345.60。').normalize())
     print(Text(raw_text='日期：今天是9012年12月15日,天气很好').normalize())
     print(Text(raw_text='金钱：小花有20000澳元，小明借了50.5元花了30.5剩下20块,非常的高兴,那就给小花12块5吧,那我就剩下17块5，小明还欠34.5，小草欠小花20.1万').normalize())
+    print(Text(raw_text='特殊：O2O或B2C。').normalize())
