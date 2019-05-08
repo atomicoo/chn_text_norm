@@ -9,10 +9,10 @@ git clone this repo to the root directory of your project which need to use it.
     cd /path/to/proj
     git clone https://github.com/Joee1995/chn-text-norm.git
 
-After that, your doc tree should be:
+after that, your doc tree should be:
 ```
-proj   # root of your project
-  |- chn_text_norm
+proj                     # root of your project
+  |- chn_text_norm       # this chn-text-norm tool
       |- text.py
       |- ...
   |- text_normalize.py   # your text normalization code
