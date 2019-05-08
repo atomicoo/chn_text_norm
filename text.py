@@ -21,10 +21,10 @@ CURRENCY_NAMES = '(人民币|美元|日元|英镑|欧元|马克|法郎|加拿大
 CURRENCY_UNITS = '((亿|千万|百万|万|千|百)|(亿|千万|百万|万|千|百|)元|(亿|千万|百万|万|千|百|)块|角|毛|分)'
 COM_QUANTIFIERS = '(匹|张|座|回|场|尾|条|个|首|阙|阵|网|炮|顶|丘|棵|只|支|袭|辆|挑|担|颗|壳|窠|曲|墙|群|腔|' \
                   '砣|座|客|贯|扎|捆|刀|令|打|手|罗|坡|山|岭|江|溪|钟|队|单|双|对|出|口|头|脚|板|跳|枝|件|贴|' \
-                  '针|线|管|名|位|身|堂|课|本|页|家|户|层|丝|毫|厘|分|钱|两|斤|担|铢|石|钧|锱|忽|克|毫|厘|分|' \
-                  '寸|尺|丈|里|寻|常|铺|程|米|撮|勺|合|升|斗|石|盘|碗|碟|叠|桶|笼|盆|盒|杯|钟|斛|锅|簋|篮|盘|' \
-                  '桶|罐|瓶|壶|卮|盏|箩|箱|煲|啖|袋|钵|年|月|日|季|刻|时|周|天|秒|分|旬|纪|岁|世|更|夜|春|夏|' \
-                  '秋|冬|代|伏|辈|丸|泡|粒|颗|幢 堆|条|根|支|道|面|片|张|颗|块)'
+                  '针|线|管|名|位|身|堂|课|本|页|家|户|层|丝|毫|厘|分|钱|两|斤|担|铢|石|钧|锱|忽|(千|毫|微)克|' \
+                  '毫|厘|分|寸|尺|丈|里|寻|常|铺|程|(千|分|厘|毫|微)米|撮|勺|合|升|斗|石|盘|碗|碟|叠|桶|笼|盆|' \
+                  '盒|杯|钟|斛|锅|簋|篮|盘|桶|罐|瓶|壶|卮|盏|箩|箱|煲|啖|袋|钵|年|月|日|季|刻|时|周|天|秒|分|旬|' \
+                  '纪|岁|世|更|夜|春|夏|秋|冬|代|伏|辈|丸|泡|粒|颗|幢|堆|条|根|支|道|面|片|张|颗|块)'
 
 
 class Text:
@@ -59,7 +59,7 @@ class Text:
                 text = text.replace(matcher[0], Date(date=matcher[0]).date2chntext(), 1)
 
         # 规范化金钱
-        pattern = re.compile(r"\D+((\d+(\.\d+)?)多?" + CURRENCY_UNITS + "(\d" + CURRENCY_UNITS + "?)?)")
+        pattern = re.compile(r"\D+((\d+(\.\d+)?)[多余几]?" + CURRENCY_UNITS + "(\d" + CURRENCY_UNITS + "?)?)")
         matchers = pattern.findall(text)
         if matchers:
             # print('money')
@@ -104,7 +104,7 @@ class Text:
                 text = text.replace(matcher[0], Percentage(percentage=matcher[0]).percentage2chntext(), 1)
 
         # 规范化纯数+量词
-        pattern = re.compile(r"(\d+(\.\d+)?)多?" + COM_QUANTIFIERS)
+        pattern = re.compile(r"(\d+(\.\d+)?)[多余几]?" + COM_QUANTIFIERS)
         matchers = pattern.findall(text)
         if matchers:
             # print('cardinal+quantifier')
@@ -112,7 +112,7 @@ class Text:
                 text = text.replace(matcher[0], Cardinal(cardinal=matcher[0]).cardinal2chntext(), 1)
 
         # 规范化数字编号
-        pattern = re.compile(r"(\d{3,32})")
+        pattern = re.compile(r"(\d{4,32})")
         matchers = pattern.findall(text)
         if matchers:
             # print('digit')
