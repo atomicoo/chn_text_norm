@@ -2,7 +2,6 @@
 """
 TEXT类
 """
-from chn_text_norm.money import Money
 
 __author__ = 'Zhiyang Zhou <zyzhou@stu.xmu.edu.cn>'
 __data__ = '2019-05-03'
@@ -14,6 +13,7 @@ from chn_text_norm.digit import Digit
 from chn_text_norm.telephone import TelePhone
 from chn_text_norm.fraction import Fraction
 from chn_text_norm.date import Date
+from chn_text_norm.money import Money
 from chn_text_norm.percentage import Percentage
 
 CURRENCY_NAMES = '(人民币|美元|日元|英镑|欧元|马克|法郎|加拿大元|澳元|港币|先令|芬兰马克|爱尔兰镑|' \
@@ -89,7 +89,7 @@ class Text:
                 text = text.replace(matcher, Fraction(fraction=matcher).fraction2chntext())
 
         # 规范化百分数
-        pattern = re.compile(r"(\d+(\.\d+)%)")
+        pattern = re.compile(r"(\d+(\.\d+)?%)")
         matchers = pattern.findall(text)
         if matchers:
             # print('percentage')
@@ -124,7 +124,7 @@ if __name__ == '__main__':
     print(Text(raw_text='固话：0595-23865596或23880880').normalize())
     print(Text(raw_text='手机：+86 19859213959。').normalize())
     print(Text(raw_text='分数：32477/76391。').normalize())
-    print(Text(raw_text='百分数：32.04%。').normalize())
+    print(Text(raw_text='百分数：80%。').normalize())
     print(Text(raw_text='编号：31520181154418。').normalize())
     print(Text(raw_text='纯数：2983.07或12345.60。').normalize())
     print(Text(raw_text='日期：1999年2月20日或09年3月15号。').normalize())
