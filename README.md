@@ -11,10 +11,11 @@ git clone this repo to the root directory of your project which need to use it.
 
 After that, your doc tree should be:
 ```
-your proj
+proj   # root of your project
   |- chn_text_norm
       |- text.py
       |- ...
+  |- text_normalize.py   # your text normalization code
   |- ...
 ```
 
