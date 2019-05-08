@@ -9,6 +9,15 @@ git clone this repo to the root directory of your project which need to use it.
     cd /path/to/proj
     git clone https://github.com/Joee1995/chn-text-norm.git
 
+After that, your doc tree should be:
+```
+your proj
+  |- chn_text_norm
+      |- text.py
+      |- ...
+  |- ...
+```
+
 ### How to Use ? ###
 
     from chn_text_norm.text import *
