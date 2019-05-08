@@ -23,7 +23,7 @@ class Digit:
     #     return chn2num(self.chntext)
 
     def digit2chntext(self):
-        return num2chn(self.digit, alt_two=False, use_lzeros=True, use_rzeros=True, use_units=False)
+        return num2chn(self.digit, alt_two=False, use_units=False)
 
 
 if __name__ == '__main__':

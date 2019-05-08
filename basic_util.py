@@ -143,7 +143,7 @@ def chn2num(chinese_string, numbering_type=NUMBERING_TYPES[1]):
 
 def num2chn(number_string, numbering_type=NUMBERING_TYPES[1], big=False,
             traditional=False, alt_zero=False, alt_one=False, alt_two=True,
-            use_lzeros=False, use_rzeros=False, use_units=True):
+            use_zeros=True, use_units=True):
 
     def get_value(value_string, use_zeros=True):
 
@@ -215,10 +215,8 @@ def num2chn(number_string, numbering_type=NUMBERING_TYPES[1], big=False,
 
     result = ''.join([getattr(s, attr_name) for s in result_symbols])
 
-    if not use_lzeros:
-        result = result.lstrip(getattr(system.digits[0], attr_name))
-    if not use_rzeros:
-        result = result.rstrip(getattr(system.digits[0], attr_name))
+    # if not use_zeros:
+    #     result = result.strip(getattr(system.digits[0], attr_name))
 
     if alt_zero:
         result = result.replace(

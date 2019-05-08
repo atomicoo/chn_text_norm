@@ -32,15 +32,13 @@ class TelePhone:
         if fixed:
             sil_parts = self.telephone.split('-')
             self.raw_chntext = '<SIL>'.join([
-                num2chn(part, alt_two=False, use_lzeros=True, use_rzeros=True,
-                        use_units=False) for part in sil_parts
+                num2chn(part, alt_two=False, use_units=False) for part in sil_parts
             ])
             self.chntext = self.raw_chntext.replace('<SIL>', '')
         else:
             sp_parts = self.telephone.strip('+').split()
             self.raw_chntext = '<SP>'.join([
-                num2chn(part, alt_two=False, use_lzeros=True, use_rzeros=True,
-                        use_units=False) for part in sp_parts
+                num2chn(part, alt_two=False, use_units=False) for part in sp_parts
             ])
             self.chntext = self.raw_chntext.replace('<SP>', '')
         return self.chntext
