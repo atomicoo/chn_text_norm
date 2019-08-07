@@ -1,5 +1,5 @@
 # chn-text-norm
-this is a repo for chinese text normalization.
+this is a repository for chinese text normalization (no longer maintained).
 
 ## Quick Start ##
 
