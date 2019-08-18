@@ -1,4 +1,4 @@
-# chn-text-norm
+# Chn Text Norm
 this is a repository for chinese text normalization (no longer maintained).
 
 ## Quick Start ##
