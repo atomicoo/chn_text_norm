@@ -1,5 +1,3 @@
-# This account is no longer in use, see [Atomicoo](https://github.com/atomicoo) for my latest works.
-
 # Chn Text Norm
 
 this is a repository for chinese text normalization (no longer maintained).
